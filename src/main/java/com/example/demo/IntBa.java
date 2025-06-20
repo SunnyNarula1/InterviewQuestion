@@ -2,6 +2,7 @@ package com.example.demo;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -59,6 +60,7 @@ public class IntBa {
 			}
 		}
 		Collections.sort(list);
+		//Collections.sort(list, Comparator.reverseOrder());
 		return list.get(k-1);
 	}
 
