@@ -99,3 +99,38 @@ public class hInt {
 //globaland coustom exception
 //resttemplate vs feign client
 //
+class RateLimiter {
+
+private Map<String, Integer> requestCounts = new HashMap<>();
+private long windowStart = System.currentTimeMillis();
+private final int LIMIT = 100;
+
+public boolean allowRequest(String userId) {
+
+long now = System.currentTimeMillis();
+
+if (now - windowStart > 60000) {
+requestCounts.clear();
+windowStart = now;
+}
+
+int count = requestCounts.getOrDefault(userId, 0);
+
+if (count >= LIMIT) {
+return false;
+}
+
+requestCounts.put(userId, count + 1);
+
+return true;
+}
+}
+
+//Tasks
+//Identify thread-safety issues
+
+//Refactor for concurrent requests
+
+//Improve performance
+
+//Handle edge cases
